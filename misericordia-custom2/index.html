@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="js/aframe.min.js"></script>
+        <script src="js/aframe-ar.js"></script>
+        <script src="js/aframe-extras.loaders.min.js"></script>
+        <script src="js/gesture-detector.js"></script>
+        <script src="js/gesture-handler.js"></script>
+
+
+    </head>
+
+    <body style="margin: 0; overflow: hidden;">
+
+        <a-scene
+            vr-mode-ui="enabled: false;"
+            loading-screen="enabled: true;"
+            renderer="logarithmicDepthBuffer: true;antialias: true; colorManagement: true; sortObjects: true; physicallyCorrectLights: false;"
+            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;"
+            id="scene"
+            embedded
+            gesture-detector
+        >
+            <a-assets>
+                <a-asset-item
+                    id="animated-asset"
+                    src="assets/asset.glb"
+                ></a-asset-item>
+            </a-assets>
+
+                     <a-marker
+                     id="markerA"
+                     type="pattern" preset="custom"
+                     url="pattern-2.patt"
+                     smooth="true"
+                     raycaster="objects: .clickable"
+                     emitevents="true"
+                     cursor="fuse: false; rayOrigin: mouse;"
+
+                     smooth='true' smoothCount='5' smoothThreshold='2' smoothTolerance="0.01"
+                     >
+
+                <a-entity
+                    id="bowser-model"
+                    scale="0.5 0.5 0.5"
+                    animation-mixer="loop: repeat"
+                    gltf-model="#animated-asset"
+                    class="clickable"
+                    gesture-handler
+                ></a-entity>
+            </a-marker>
+
+            <a-entity camera></a-entity>
+        </a-scene>
+    </body>
+</html>
